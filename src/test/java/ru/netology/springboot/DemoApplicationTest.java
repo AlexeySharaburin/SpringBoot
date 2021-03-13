@@ -9,9 +9,7 @@ import org.testcontainers.junit.jupiter.Container;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
-import org.testcontainers.junit.jupiter.Testcontainers;
 
-@Testcontainers
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 public class DemoApplicationTest {
     private final String HOST = "http://localhost:";
@@ -28,27 +26,23 @@ public class DemoApplicationTest {
         devApp.start();
         prodApp.start();
     }
-//    @Test
-//    void contextLoads() {
-//        var port1 = devApp.getMappedPort(8080);
-//        ResponseEntity<String> forEntity1 = restTemplate.getForEntity(HOST + port1, String.class);
-//        System.out.println(forEntity1.getBody());
-//
-//    }
+
 
     @Test
     void contextLoads() {
         var port1 = devApp.getMappedPort(8080);
         ResponseEntity<String> forEntity1 = restTemplate.getForEntity(HOST + port1, String.class);
         System.out.println("Port1: " + port1);
+        System.out.println(forEntity1.getBody());
         String msgExpected1 = "Current profile is dev";
         String msg1 = forEntity1.getBody();
         System.out.print("Dev? -> ");
         Assertions.assertEquals(msg1, msgExpected1);
 
-        var port2 = prodApp.getMappedPort(8080);
+        var port2 = prodApp.getMappedPort(8081);
         ResponseEntity<String> forEntity2 = restTemplate.getForEntity(HOST + port2, String.class);
         System.out.println("Port2: " + port2);
+        System.out.println(forEntity2.getBody());
         String msgExpected2 = "Current profile is production";
         String msg2 = forEntity2.getBody();
         System.out.print("\nProduction? -> ");
