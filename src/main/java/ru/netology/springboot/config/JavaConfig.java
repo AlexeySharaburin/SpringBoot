@@ -13,6 +13,7 @@ public class JavaConfig {
     @Bean(name = "devProfile")
     @ConditionalOnProperty(
             value = "netology.profile.dev",
+            havingValue = "true",
             matchIfMissing = true
     )
     public SystemProfile devProfile() {
@@ -27,6 +28,10 @@ public class JavaConfig {
     public SystemProfile prodProfile() {
         return new ProductionProfile();
     }
-
-
 }
+
+
+//    @ConditionalOnExpression("${properties.netology.profile.dev:true}")
+//    @ConditionalOnExpression("${properties.netology.profile.dev} == true")
+//    @ConditionalOnExpression("${properties.netology.profile.dev} == false")
+//    @ConditionalOnExpression("${properties.netology.profile.dev:false}")
