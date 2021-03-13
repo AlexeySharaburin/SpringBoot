@@ -1,15 +1,17 @@
 package ru.netology.springboot;
 
-import org.junit.Assert;
-import org.junit.Test;
-import org.junit.jupiter.api.BeforeAll;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.http.ResponseEntity;
 import org.testcontainers.containers.GenericContainer;
 import org.testcontainers.junit.jupiter.Container;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
+import org.testcontainers.junit.jupiter.Testcontainers;
 
+@Testcontainers
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 public class DemoApplicationTest {
     private final String HOST = "http://localhost:";
@@ -42,7 +44,7 @@ public class DemoApplicationTest {
         String msgExpected1 = "Current profile is dev";
         String msg1 = forEntity1.getBody();
         System.out.print("Dev? -> ");
-        Assert.assertEquals(msg1, msgExpected1);
+        Assertions.assertEquals(msg1, msgExpected1);
 
         var port2 = prodApp.getMappedPort(8080);
         ResponseEntity<String> forEntity2 = restTemplate.getForEntity(HOST + port2, String.class);
@@ -50,7 +52,7 @@ public class DemoApplicationTest {
         String msgExpected2 = "Current profile is production";
         String msg2 = forEntity2.getBody();
         System.out.print("\nProduction? -> ");
-        Assert.assertEquals(msg2, msgExpected2);
+        Assertions.assertEquals(msg2, msgExpected2);
 
     }
 
