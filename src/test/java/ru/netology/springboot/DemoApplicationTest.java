@@ -30,14 +30,18 @@ public class DemoApplicationTest {
 
     @Test
     void contextLoads1() {
+        System.out.println();
+        System.out.println("Я разобрался!!!!! Спасибо!!!!");
+        System.out.println();
         var port1 = devApp.getMappedPort(8080);
         ResponseEntity<String> forEntity1 = restTemplate.getForEntity(HOST + port1 + "/profile", String.class);
         System.out.println("Port1: " + port1);
         System.out.println(forEntity1.getBody());
-        String msgExpected1 = "Current profile is dev";
+        String msgExpected1 = "Current profile is dev\n";
         String msg1 = forEntity1.getBody();
         System.out.print("Dev? -> ");
         Assertions.assertEquals(msg1, msgExpected1);
+        System.out.println("Я разобрался!!!!! Спасибо!!!!");
     }
 
     @Test
@@ -46,7 +50,7 @@ public class DemoApplicationTest {
         ResponseEntity<String> forEntity2 = restTemplate.getForEntity(HOST + port2 + "/profile", String.class);
         System.out.println("Port2: " + port2);
         System.out.println(forEntity2.getBody());
-        String msgExpected2 = "Current profile is production";
+        String msgExpected2 = "Current profile is production\n";
         String msg2 = forEntity2.getBody();
         System.out.print("\nProduction? -> ");
         Assertions.assertEquals(msg2, msgExpected2);
