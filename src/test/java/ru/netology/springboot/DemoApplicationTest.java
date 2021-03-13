@@ -29,7 +29,7 @@ public class DemoApplicationTest {
 
 
     @Test
-    void contextLoads() {
+    void contextLoads1() {
         var port1 = devApp.getMappedPort(8080);
         ResponseEntity<String> forEntity1 = restTemplate.getForEntity(HOST + port1, String.class);
         System.out.println("Port1: " + port1);
@@ -38,7 +38,10 @@ public class DemoApplicationTest {
         String msg1 = forEntity1.getBody();
         System.out.print("Dev? -> ");
         Assertions.assertEquals(msg1, msgExpected1);
+    }
 
+    @Test
+    void contextLoads2() {
         var port2 = prodApp.getMappedPort(8081);
         ResponseEntity<String> forEntity2 = restTemplate.getForEntity(HOST + port2, String.class);
         System.out.println("Port2: " + port2);
@@ -47,7 +50,6 @@ public class DemoApplicationTest {
         String msg2 = forEntity2.getBody();
         System.out.print("\nProduction? -> ");
         Assertions.assertEquals(msg2, msgExpected2);
-
     }
 
 }
